@@ -1,16 +1,16 @@
 const express = require('express');
-const db = require('../config/dbConfig');
-const { protected } = require('../common/middleware');
+const db = require('../data/dbConfig');
+const { protect } = require('../common/middleware');
 
 const router = express.Router();
 
-router.get('/:id/plants', protected, async (req, res) => {
-  const id = req.params.id;
+router.get('/:id/plants', protect, async (req, res) => {
+  const { id } = req.params;
   const plants = await db('plants').where('user_id', id);
   res.status(200).json(plants);
 });
 
-router.post('/:id/plants', protected, async (req, res) => {
+router.post('/:id/plants', protect, async (req, res) => {
   try {
     const { id } = req.params;
     const plant = req.body;

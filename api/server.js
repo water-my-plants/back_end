@@ -15,8 +15,7 @@ server.get('/', (req, res) => {
 
 server.use('/api/login', loginRoute);
 server.use('/api/register', registerRoute);
-// server.use('/api/user/:id/plants', plantsRoute);
 server.use('/api/users', usersRoute);
-server.use('/api/plants', plantsRoute)
+server.use('/api/plants', plantsRoute);
 
 module.exports = server;

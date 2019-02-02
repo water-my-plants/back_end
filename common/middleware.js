@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = {
-  protected: (req, res, next) => {
+  protect: (req, res, next) => {
     const token = req.headers.authorization;
     console.log(req.headers);
-  
+
     if (token) {
       jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
         if (err) {
@@ -15,7 +15,9 @@ module.exports = {
         }
       });
     } else {
-      res.status(401).json({ message: 'Please provide a token' });
+      res
+        .status(401)
+        .json({ message: 'You are unauthorized! Please provide a token' });
     }
   }
-}
+};
