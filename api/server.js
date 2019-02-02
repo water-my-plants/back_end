@@ -1,5 +1,6 @@
 const express = require('express');
 const loginRoute = require('../routes/loginRoute');
+const registerRoute = require('../routes/registerRoute');
 const middlewareConfig = require('../config/middlewareConfig');
 
 const server = express();
@@ -10,5 +11,6 @@ server.get('/', (req, res) => {
 });
 
 server.use('/api/login', loginRoute);
+server.use('/api/register', registerRoute);
 
 module.exports = server;
