@@ -51,6 +51,9 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
+# vs code
+.vscode
+
 # Yarn Integrity file
 .yarn-integrity
 

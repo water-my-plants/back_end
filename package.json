@@ -19,7 +19,12 @@
   },
   "homepage": "https://github.com/water-my-plants/back_end#readme",
   "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
     "nodemon": "^1.18.9",
+    "prettier": "^1.16.3",
     "supertest": "^3.4.2"
   },
   "dependencies": {
