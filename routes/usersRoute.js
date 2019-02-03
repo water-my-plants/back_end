@@ -4,26 +4,29 @@ const { protect } = require('../common/middleware');
 
 const router = express.Router();
 
+// get all user's plants
 router.get('/:id/plants', protect, async (req, res) => {
+  try {
   const { id } = req.params;
-  const plants = await db('plants').where('user_id', id);
-  res.status(200).json(plants);
+  const plant = await plants.getUserPlants(id);
+  res.status(200).json(plant);
+  } catch(err) {
+    res.status(500).json({ error: `houston, we have a problem: ${err}` })
+    
+  }
 });
 
+// add a user plant
 router.post('/:id/plants', protect, async (req, res) => {
   try {
     const { id } = req.params;
     const plant = req.body;
-    console.log(plant);
 
     if (!plant.name) {
       res.status(404).json({ error: 'Your plant must have a name' });
     } else {
-      // const count = await db('plants').insert({ user_id: id, ...plant });
       const [plantId] = await plants.addPlant(id, plant);
-      console.log(plantId);
       const newPlant = await plants.getPlantById(plantId);
-      console.log(newPlant);
       
       res.status(200).json(newPlant);
     }

@@ -9,6 +9,7 @@ exports.users = {
 };
 
 exports.plants = {
+  getUserPlants:(user_id) => db('plants').where({ user_id }),
   getPlantById: id => db('plants').where({ id }).first(),
   deletePlantById: id =>
     db('plants')
