@@ -32,10 +32,7 @@
 
 ---
 ### GET /api/plants [TODO]
-* Get a list of all plants in the db
-
----
-### GET /api/plants [TODO]
+* returns all plants in the db
 
 ---
 ### GET /api/users/{userId}/plants
