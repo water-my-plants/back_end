@@ -1,5 +1,6 @@
 # API for Water My Plants project
 
+## Base URL: https://watermyplants.herokuapp.com
 ## endpoints
 
 ### POST /api/register
