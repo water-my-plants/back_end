@@ -6,14 +6,11 @@ pg.defaults.ssl = true;
 
 module.exports = {
   development: {
+    // database: './data/db',
     // user: 'username',
-    // password: 'password',
-    client: 'sqlite3',
-    connection: {
-      filename: './data/db.sqlite3'
-    },
-    useNullAsDefault: true,
-    // connection: './data/waterdb',
+    // password: 'password'
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
     migrations: {
       directory: './data/migrations'
     },
@@ -26,7 +23,7 @@ module.exports = {
     client: 'pg',
     connection: process.env.DATABASE_URL,
     migrations: {
-      tableName: 'knex_migrations'
+      tableName: './data/migrations'
     }
   }
 };

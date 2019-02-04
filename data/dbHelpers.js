@@ -20,7 +20,7 @@ exports.plants = {
   getPlantById: id =>
     db('plants')
       .where({ id })
-      // .first(),
+      .first(),
   deletePlantById: id =>
     db('plants')
       .where({ id })
