@@ -11,8 +11,6 @@ router.get('/', (req, res) => {
 router.get('/:id', protect, async (req, res) => {
   try {
     const { id } = req.params;
-    // const plant = await db('plants').where({ id });
-
     const plant = await plants.getPlantById(id);
     res.json(plant);
   } catch (err) {

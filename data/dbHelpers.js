@@ -2,16 +2,19 @@ const db = require('./dbConfig');
 
 exports.users = {
   getUsers: () => db('users').select('username', 'img_url'),
-  getUser: username =>
+  getUser: id =>
     db('users')
-      .where({ username })
+      .where({ id })
       .first(),
   addUser: user => db('users').insert(user)
 };
 
 exports.plants = {
-  getUserPlants:(user_id) => db('plants').where({ user_id }),
-  getPlantById: id => db('plants').where({ id }).first(),
+  getUserPlants: user_id => db('plants').where({ user_id }),
+  getPlantById: id =>
+    db('plants')
+      .where({ id })
+      .first(),
   deletePlantById: id =>
     db('plants')
       .where({ id })
@@ -19,6 +22,6 @@ exports.plants = {
   updatePlant: (id, changes) =>
     db('plants')
       .where({ id })
-  .update(changes),
+      .update(changes),
   addPlant: (user_id, plant) => db('plants').insert({ user_id, ...plant })
 };

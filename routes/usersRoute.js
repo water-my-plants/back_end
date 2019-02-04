@@ -1,5 +1,5 @@
 const express = require('express');
-const {users, plants} = require('../data/dbHelpers');
+const { users, plants } = require('../data/dbHelpers');
 const { protect } = require('../common/middleware');
 
 const router = express.Router();
@@ -9,27 +9,25 @@ router.get('/', protect, async (req, res) => {
   try {
     const userList = await users.getUsers();
     res.status(200).json(userList);
-
-  } catch(err) {
-    res.status(500).json({error: `error! ${err}`})
+  } catch (err) {
+    res.status(500).json({ error: `error! ${err}` });
   }
-})
+});
 // get all user's plants
 router.get('/:id/plants', protect, async (req, res) => {
   try {
-  const { id } = req.params;
-  const plant = await plants.getUserPlants(id);
-  res.status(200).json(plant);
-  } catch(err) {
-    res.status(500).json({ error: `houston, we have a problem: ${err}` })
-    
+    const { id } = req.params;
+    const plant = await plants.getUserPlants(id);
+    res.status(200).json(plant);
+  } catch (err) {
+    res.status(500).json({ error: `houston, we have a problem: ${err}` });
   }
 });
 
 // add a user plant
 router.post('/:id/plants', protect, async (req, res) => {
   console.log('decoded token', req.decodedToken);
-  
+
   try {
     const { id } = req.params;
     const plant = req.body;
@@ -39,7 +37,7 @@ router.post('/:id/plants', protect, async (req, res) => {
     } else {
       const [plantId] = await plants.addPlant(id, plant);
       const newPlant = await plants.getPlantById(plantId);
-      
+
       res.status(200).json(newPlant);
     }
   } catch (err) {
