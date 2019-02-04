@@ -13,6 +13,20 @@ router.get('/', protect, async (req, res) => {
     res.status(500).json({ error: `error! ${err}` });
   }
 });
+
+// get a single user
+router.get('/:id', protect, async (req, res) => {
+  try {
+    const user = await users.getUserById(req.params.id);
+    delete user.password;
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ error: `there was an error accessing the db: ${err}` });
+  }
+});
 // get all user's plants
 router.get('/:id/plants', protect, async (req, res) => {
   try {

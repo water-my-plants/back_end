@@ -48,12 +48,24 @@
 * Use the provided token in the authorization header on future requests
 
 ---
-### GET /api/users/{user id} [TODO]
+### GET /api/users/{user id}
 **JWT token required**
+* Returns an object with a single user's info
+```
+{
+ "user": {
+    "id": 1,
+    "username": "john",
+    "email": "john@gmail.com",
+    "phone": "123-456-7890",
+    "img_url": null
+}
+```
 
 ---
-### GET /api/users/ [TODO]
+### GET /api/users/
 **JWT token required**
+* Returns a list of all users
 
 ---
 ### GET /api/plants [TODO]

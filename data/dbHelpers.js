@@ -6,6 +6,10 @@ exports.users = {
     db('users')
       .where({ username })
       .first(),
+  getUserById: id =>
+    db('users')
+      .where({ id })
+      .first(),
   addUser: user => db('users').insert(user)
 };
 
