@@ -35,9 +35,6 @@ router.put('/:id', protect, async (req, res) => {
     const { id } = req.params;
     const changes = req.body;
     if (changes) {
-      // const count = await db('plants')
-      //   .where({ id })
-      //   .update(changes);
       const count = await plants.updatePlant(id, changes);
       res.status(200).json(count);
     } else {
