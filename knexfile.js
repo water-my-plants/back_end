@@ -6,13 +6,14 @@ pg.defaults.ssl = true;
 
 module.exports = {
   development: {
-    // database: './data/db',
     // user: 'username',
-    // password: 'password'
-    client: 'pg',
-    connection:
-      'postgres://oarbocgruedasc:0e774ddedd79887e7db7554dda8ccf1c22ec2791b04ceb20a6ded123c72b9f77@ec2-174-129-224-157.compute-1.amazonaws.com:5432/d3l9p5upddbh17',
+    // password: 'password',
+    client: 'sqlite3',
+    connection: {
+      filename: './data/db.sqlite3'
+    },
     useNullAsDefault: true,
+    // connection: './data/waterdb',
     migrations: {
       directory: './data/migrations'
     },
@@ -21,33 +22,9 @@ module.exports = {
     }
   },
 
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
-
   production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user: 'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
     migrations: {
       tableName: 'knex_migrations'
     }

@@ -27,6 +27,7 @@ router.get('/:id', protect, async (req, res) => {
       .json({ error: `there was an error accessing the db: ${err}` });
   }
 });
+
 // get all user's plants
 router.get('/:id/plants', protect, async (req, res) => {
   try {

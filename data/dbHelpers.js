@@ -14,6 +14,8 @@ exports.users = {
 };
 
 exports.plants = {
+  getAllPlants: () =>
+    db('plants').select('name', 'description', 'characteristics'),
   getUserPlants: user_id => db('plants').where({ user_id }),
   getPlantById: id =>
     db('plants')

@@ -4,10 +4,18 @@ const { protect } = require('../common/middleware');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send('plants plants plants!');
+router.get('/', async (req, res) => {
+  try {
+    const plantList = await plants.getAllPlants();
+    res.status(200).json(plantList);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: `there was an error accessing the databse: ${err}` });
+  }
 });
 
+// get a plant
 router.get('/:id', protect, async (req, res) => {
   try {
     const { id } = req.params;
@@ -18,6 +26,7 @@ router.get('/:id', protect, async (req, res) => {
   }
 });
 
+// delete a plant
 router.delete('/:id', protect, async (req, res) => {
   try {
     const { id } = req.params;
@@ -28,6 +37,7 @@ router.delete('/:id', protect, async (req, res) => {
   }
 });
 
+// update a plant
 router.put('/:id', protect, async (req, res) => {
   try {
     const { id } = req.params;
