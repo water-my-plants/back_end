@@ -4,7 +4,7 @@
 
 ### POST /api/register
 * registers a user. must have username, password, email, and phone number. image url optional.
-* Reqeust example: 
+* Request example: 
 ```
 {
   username: "john",
@@ -28,8 +28,8 @@
 * Request example:
 ```
 {
-  "username": "user",
-  "password": "password"
+  "username": "john",
+  "password": "password123"
 }
 ```
 * Returns 
