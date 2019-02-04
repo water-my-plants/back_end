@@ -1,18 +1,23 @@
 // Update with your config settings.
+require('dotenv').config();
+const pg = require('pg');
+
+pg.defaults.ssl = true;
 
 module.exports = {
-
   development: {
-    client: 'sqlite3',
-    connection: {
-      filename: './data/db.sqlite3',
-    },
+    // database: './data/db',
+    // user: 'username',
+    // password: 'password'
+    client: 'pg',
+    connection:
+      'postgres://oarbocgruedasc:0e774ddedd79887e7db7554dda8ccf1c22ec2791b04ceb20a6ded123c72b9f77@ec2-174-129-224-157.compute-1.amazonaws.com:5432/d3l9p5upddbh17',
     useNullAsDefault: true,
     migrations: {
-      directory: './data/migrations',
+      directory: './data/migrations'
     },
     seeds: {
-      directory: './data/seeds',
+      directory: './data/seeds'
     }
   },
 
@@ -20,7 +25,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -36,7 +41,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -47,5 +52,4 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   }
-
 };

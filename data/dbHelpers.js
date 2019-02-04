@@ -2,9 +2,9 @@ const db = require('./dbConfig');
 
 exports.users = {
   getUsers: () => db('users').select('username', 'img_url'),
-  getUser: id =>
+  getUser: username =>
     db('users')
-      .where({ id })
+      .where({ username })
       .first(),
   addUser: user => db('users').insert(user)
 };
