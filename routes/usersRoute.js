@@ -41,8 +41,6 @@ router.get('/:id/plants', protect, async (req, res) => {
 
 // add a user plant
 router.post('/:id/plants', protect, async (req, res) => {
-  console.log('decoded token', req.decodedToken);
-
   try {
     const { id } = req.params;
     const plant = req.body;
