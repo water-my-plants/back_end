@@ -1,9 +1,19 @@
 const express = require('express');
-const {plants} = require('../data/dbHelpers');
+const {users, plants} = require('../data/dbHelpers');
 const { protect } = require('../common/middleware');
 
 const router = express.Router();
 
+// get a list of all users
+router.get('/', protect, async (req, res) => {
+  try {
+    const userList = await users.getUsers();
+    res.status(200).json(userList);
+
+  } catch(err) {
+    res.status(500).json({error: `error! ${err}`})
+  }
+})
 // get all user's plants
 router.get('/:id/plants', protect, async (req, res) => {
   try {
@@ -18,6 +28,8 @@ router.get('/:id/plants', protect, async (req, res) => {
 
 // add a user plant
 router.post('/:id/plants', protect, async (req, res) => {
+  console.log('decoded token', req.decodedToken);
+  
   try {
     const { id } = req.params;
     const plant = req.body;

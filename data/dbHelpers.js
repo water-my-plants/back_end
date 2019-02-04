@@ -1,6 +1,7 @@
 const db = require('./dbConfig');
 
 exports.users = {
+  getUsers: () => db('users').select('username', 'img_url'),
   getUser: username =>
     db('users')
       .where({ username })
