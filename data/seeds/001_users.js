@@ -1,6 +1,26 @@
 const bcrypt = require('bcryptjs');
+const faker = require('faker');
 
 const pw = bcrypt.hashSync('pass');
+
+const seeds = [
+  {
+    username: 'justin',
+    email: 'justin@jisdf',
+    password: pw,
+    phone: '123456789'
+  }
+];
+for (let i = 0; i < 20; i++) {
+  seeds.push({
+    username: faker.internet.userName(),
+    email: faker.internet.email(),
+    password: pw,
+    phone: faker.phone.phoneNumber('+1##########')
+  });
+}
+
+console.log(seeds);
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
@@ -8,37 +28,6 @@ exports.seed = function(knex, Promise) {
     .del()
     .then(function() {
       // Inserts seed entries
-      return knex('users').insert([
-        {
-          username: 'justin',
-          email: 'justin@jisdf',
-          password: pw,
-          phone: '123456789'
-        },
-        {
-          username: 'lidiia',
-          email: 'lidiia@jifosd',
-          password: pw,
-          phone: '0987461'
-        },
-        {
-          username: 'test1',
-          email: 'lidiia@jifsd',
-          password: pw,
-          phone: '13701475'
-        },
-        {
-          username: 'test2',
-          email: 'lidiia@jifd',
-          password: pw,
-          phone: '1728935'
-        },
-        {
-          username: 'testuser4',
-          email: 'jfiosjfd@fjdios',
-          password: pw,
-          phone: '1273591'
-        }
-      ]);
+      return knex('users').insert([...seeds]);
     });
 };
