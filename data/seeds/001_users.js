@@ -11,7 +11,7 @@ const seeds = [
     phone: '123456789'
   }
 ];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 100; i++) {
   seeds.push({
     username: faker.internet.userName(),
     email: faker.internet.email(),
@@ -19,8 +19,6 @@ for (let i = 0; i < 20; i++) {
     phone: faker.phone.phoneNumber('+1##########')
   });
 }
-
-console.log(seeds);
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
