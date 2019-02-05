@@ -77,4 +77,19 @@ router.put('/:id', protect, async (req, res) => {
   }
 });
 
+// add a watering time
+// expects an array of times
+router.post('/:id', protect, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const times = [...req.body.times];
+    console.log(id);
+    console.log(times);
+    times.forEach(async time => await plants.addWatering(id, time));
+    res.end();
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
