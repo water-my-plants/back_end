@@ -79,14 +79,21 @@ router.put('/:id', protect, async (req, res) => {
 
 // add a watering time
 // expects an array of times
+// should return the updated schedule
 router.post('/:id', protect, async (req, res) => {
   try {
     const { id } = req.params;
     const times = [...req.body.times];
-    console.log(id);
-    console.log(times);
-    times.forEach(async time => await plants.addWatering(id, time));
-    res.end();
+    // times.forEach(async time => await plants.addWatering(id, time));
+    for (let i = 0; i < times.length; i++) {
+      const testArr = await plants.addWatering(id, times[i]);
+      console.log(testArr);
+    }
+
+    let schedule = await plants.getWateringSchedule(id);
+    schedule = schedule.map(time => time.watering_time);
+    console.log(schedule);
+    res.status(200).json(schedule);
   } catch (err) {
     res.status(500).json(err);
   }
