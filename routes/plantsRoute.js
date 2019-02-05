@@ -20,7 +20,11 @@ router.get('/:id', protect, async (req, res) => {
   try {
     const { id } = req.params;
     const plant = await plants.getPlantById(id);
-    res.json(plant);
+    if (!plant) {
+      res.status(400).json({ error: 'there is no plant with that id' });
+    } else {
+      res.json(plant);
+    }
   } catch (err) {
     res.status(500).json({ error: `oh no!!! ${err}` });
   }
@@ -34,6 +38,10 @@ router.delete('/:id', protect, async (req, res) => {
 
     // get plant and ensure that it is owned by user
     const plant = await plants.getPlantById(id);
+    if (!plant) {
+      res.status(400).json({ error: 'there is no plant with that id' });
+      return;
+    }
     if (plant.user_id === userId) {
       const count = await plants.deletePlantById(id);
       if (count) {
