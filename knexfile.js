@@ -2,7 +2,7 @@
 require('dotenv').config();
 const pg = require('pg');
 
-pg.defaults.ssl = true;
+// pg.defaults.ssl = true;
 
 module.exports = {
   development: {
@@ -10,7 +10,13 @@ module.exports = {
     // user: 'username',
     // password: 'password'
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    // connection: process.env.DATABASE_URL,
+    connection: {
+      host: '127.0.0.1',
+      user: 'justin',
+      password: 'password',
+      database: 'testdb'
+    },
     migrations: {
       directory: './data/migrations'
     },
@@ -23,7 +29,10 @@ module.exports = {
     client: 'pg',
     connection: process.env.DATABASE_URL,
     migrations: {
-      tableName: './data/migrations'
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
     }
   }
 };
