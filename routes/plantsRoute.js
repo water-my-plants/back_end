@@ -92,4 +92,25 @@ router.post('/:id', protect, async (req, res) => {
   }
 });
 
+// returns a plant's watering schedule
+router.get('/:id/schedule', protect, async (req, res) => {
+  try {
+    let schedule = await plants.getWateringSchedule(req.params.id);
+    if (schedule.length) {
+      schedule = schedule.map(time => time.watering_time);
+      res.status(200).json(schedule);
+    } else {
+      res.status(400).json({
+        error:
+          'there is no schedule. ensure you have a valid id and the plant has a schedule'
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ error: `there was an error accessing the db: ${err}` });
+  }
+});
+
 module.exports = router;

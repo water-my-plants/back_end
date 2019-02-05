@@ -22,9 +22,13 @@ exports.plants = {
     db('plants').select('name', 'description', 'characteristics'),
   getUserPlants: user_id => db('plants').where({ user_id }),
   getPlantById: id =>
-    db('plants')
+    db('plants as p')
       .where({ id })
       .first(),
+  getWateringSchedule: plant_id =>
+    db('watering')
+      .where({ plant_id })
+      .select('watering_time'),
   deletePlantById: id =>
     db('plants')
       .where({ id })
