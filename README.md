@@ -124,3 +124,10 @@
 ### DELETE /api/plants/{plantId}
 **JWT token required**
 * Delete plant. User can only delete their own plants
+
+### POST /api/planst/{plantId}
+**JWT token required**
+* Accepts an array of times in format `YYYY-MM-DD HH:SS` and adds them to the watering schedule
+
+### GET /api/plants/{plantId}/schedule
+* Returns an array of scheduled watering times
