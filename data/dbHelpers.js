@@ -29,6 +29,5 @@ exports.plants = {
     db('plants')
       .where({ id })
       .update(changes),
-  addPlant: (user_id, plant) =>
-    db('plants').insert({ user_id, ...plant }, ['id'])
+  addPlant: (user_id, plant) => db('plants').insert({ user_id, ...plant }, 'id')
 };
