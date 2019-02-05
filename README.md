@@ -128,6 +128,10 @@
 ### POST /api/planst/{plantId}
 **JWT token required**
 * Accepts an array of times in format `YYYY-MM-DD HH:SS` and adds them to the watering schedule
+* POST body:
+```
+	"times": ["2019-02-05 18:00", "2019-02-07 8:00"]
+```
 
 ### GET /api/plants/{plantId}/schedule
 * Returns an array of scheduled watering times
