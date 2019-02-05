@@ -51,7 +51,7 @@
 ---
 ### GET /api/users/{user id}
 **JWT token required**
-* Returns an object with a single user's info
+* Returns an object with a single user's info. Only accessible by that user.
 ```
 {
  "user": {
@@ -66,29 +66,53 @@
 ---
 ### GET /api/users/
 **JWT token required**
-* Returns a list of all users
+* Returns a list of all usernames and img_urls.
 
 ---
-### GET /api/plants [TODO]
-* returns all plants in the db
+### GET /api/plants
+* returns all plants in the db:
+```
+[
+    {
+        "name": "rose",
+        "description": null,
+        "characteristics": null
+    },
+    {
+        "name": "daisy",
+        "description": null,
+        "characteristics": null
+    },
+    {
+        "name": "primrose",
+        "description": null,
+        "characteristics": null
+    },
+    {
+        "name": "cactus",
+        "description": null,
+        "characteristics": null
+    }
+]
+```
 
 ---
 ### GET /api/users/{userId}/plants
 **JWT token required**
-* Get a list of all user's plants (json objects)
+* Get a list of all user's plants (json objects). Only accessible by that user.
 
 ---
-### GET /api/users/{userId}/plants/{plantId}
+### GET /api/users/{userId}/plants/{plantId} [TODO or uneccesary?]
 **JWT token required**
 * Get details on one user plant (object)
 
 ---
 ### PUT /api/users/{userId}
 **JWT token required**
-* Update user info
+* Update user info. Only accessible by that user.
 
 ---
-### PUT /api/users/{userId}/plants{plantId}
+### PUT /api/users/{userId}/plants{plantId} [TODO or uneccessary?]
 **JWT token required**
 * Update one user plant
 

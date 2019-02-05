@@ -10,7 +10,11 @@ exports.users = {
     db('users')
       .where({ id })
       .first(),
-  addUser: user => db('users').insert(user)
+  addUser: user => db('users').insert(user),
+  updateUser: (id, changes) =>
+    db('users')
+      .where({ id })
+      .update(changes)
 };
 
 exports.plants = {
