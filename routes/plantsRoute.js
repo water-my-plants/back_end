@@ -77,4 +77,40 @@ router.put('/:id', protect, async (req, res) => {
   }
 });
 
+// add a watering time
+// expects an array of times
+router.post('/:id', protect, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const times = [...req.body.times];
+    console.log(id);
+    console.log(times);
+    times.forEach(async time => await plants.addWatering(id, time));
+    res.end();
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// returns a plant's watering schedule
+router.get('/:id/schedule', protect, async (req, res) => {
+  try {
+    let schedule = await plants.getWateringSchedule(req.params.id);
+    if (schedule.length) {
+      schedule = schedule.map(time => time.watering_time);
+      res.status(200).json(schedule);
+    } else {
+      res.status(400).json({
+        error:
+          'there is no schedule. ensure you have a valid id and the plant has a schedule'
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ error: `there was an error accessing the db: ${err}` });
+  }
+});
+
 module.exports = router;

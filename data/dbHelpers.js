@@ -22,9 +22,13 @@ exports.plants = {
     db('plants').select('name', 'description', 'characteristics'),
   getUserPlants: user_id => db('plants').where({ user_id }),
   getPlantById: id =>
-    db('plants')
+    db('plants as p')
       .where({ id })
       .first(),
+  getWateringSchedule: plant_id =>
+    db('watering')
+      .where({ plant_id })
+      .select('watering_time'),
   deletePlantById: id =>
     db('plants')
       .where({ id })
@@ -33,5 +37,8 @@ exports.plants = {
     db('plants')
       .where({ id })
       .update(changes),
-  addPlant: (user_id, plant) => db('plants').insert({ user_id, ...plant }, 'id')
+  addPlant: (user_id, plant) =>
+    db('plants').insert({ user_id, ...plant }, 'id'),
+  addWatering: (plant_id, watering_time) =>
+    db('watering').insert({ plant_id, watering_time })
 };
