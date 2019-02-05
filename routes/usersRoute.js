@@ -48,7 +48,7 @@ router.post('/:id/plants', protect, async (req, res) => {
     if (!plant.name) {
       res.status(404).json({ error: 'Your plant must have a name' });
     } else {
-      const plantId = await plants.addPlant(id, plant);
+      const [plantId] = await plants.addPlant(id, plant);
       const newPlant = await plants.getPlantById(plantId);
 
       res.status(200).json(newPlant);
