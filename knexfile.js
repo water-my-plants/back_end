@@ -2,7 +2,7 @@
 require('dotenv').config();
 const pg = require('pg');
 
-// pg.defaults.ssl = true;
+pg.defaults.ssl = process.env.DB_ENV === 'production';
 
 module.exports = {
   development: {
