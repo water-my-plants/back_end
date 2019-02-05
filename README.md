@@ -120,3 +120,7 @@
 ### POST /api/users/{userId}/plants
 **JWT token required**
 * Add a new plant for the user
+
+### DELETE /api/plants/{plantId}
+**JWT token required**
+* Delete plant. User can only delete their own plants

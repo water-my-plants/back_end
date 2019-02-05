@@ -30,8 +30,24 @@ router.get('/:id', protect, async (req, res) => {
 router.delete('/:id', protect, async (req, res) => {
   try {
     const { id } = req.params;
-    const count = await plants.deletePlantById(id);
-    res.status(200).json({ message: `plants deleted: ${count}` });
+    const { userId } = req.decodedToken;
+
+    // get plant and ensure that it is owned by user
+    const plant = await plants.getPlantById(id);
+    if (plant.user_id === userId) {
+      const count = await plants.deletePlantById(id);
+      if (count) {
+        res.status(200).json({ message: 'plant deleted' });
+      } else {
+        res
+          .status(500)
+          .json({ error: 'there was an error deleting the plant' });
+      }
+    } else {
+      res
+        .status(403)
+        .json({ message: "you cannot delete another user's plant!" });
+    }
   } catch (err) {
     res.status(500).json({ error: `error! ${err}` });
   }
