@@ -135,3 +135,6 @@
 
 ### GET /api/plants/{plantId}/schedule
 * Returns an array of scheduled watering times
+
+### DELETE /api/plants/{plantId}/schedule
+* Deletes the schedule for the selected plant
