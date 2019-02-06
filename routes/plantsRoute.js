@@ -1,6 +1,7 @@
 const express = require('express');
 const { plants, notifications } = require('../data/dbHelpers');
 const { protect } = require('../common/middleware');
+const { notifier } = require('../twilio/cron');
 
 const router = express.Router();
 
@@ -88,8 +89,10 @@ router.post('/:id', protect, async (req, res) => {
     for (let i = 0; i < times.length; i++) {
       const [wateringId] = await plants.addWatering(id, times[i]);
       console.log('wateringid', wateringId);
-      const [notify] = await notifications.addNotification(wateringId);
-      console.log(notify);
+      const [notification] = await notifications.addNotification(wateringId);
+      console.log('in post:', notification);
+      notifier(notification);
+      // send notification to cron. cron uses date and sends uName, pName, phone # to send_sms
     }
 
     const schedule = await plants.getWateringSchedule(id);

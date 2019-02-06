@@ -57,5 +57,5 @@ exports.notifications = {
       .join('plants as p', 'w.plant_id', 'p.id')
       .join('users as u', 'p.user_id', 'u.id')
       .where({ 'w.id': wateringId })
-      .select('u.username', 'p.name', 'u.phone', 'w.watering_time')
+      .select('u.username', 'p.name as plant', 'u.phone', 'w.watering_time')
 };

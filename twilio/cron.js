@@ -13,11 +13,22 @@ const moment = require('moment');
   We'll need to reformat the date, either here (probably) or before the function is called.
 */
 
+/* takes in an object shaped like so: {
+  username: 'justin',
+  plant: 'bonsai',
+  phone: '+19874327894',
+  watering_time: 2038-02-05T05:00:00.000Z
+}
+  */
 module.exports = {
-  notifier: date => {
+  notifier: notification => {
+    console.log('nofier', notification);
+
     // will also need a phone number to pass to send_sms
     // function takes in a date and schedules a new Cronjob
-    const reminderTime = new Date(date);
+    const reminderTime = notification.watering_time; // redundant? do i need to convert to a date?
+    console.log(`reminderTime is ${reminderTime}`);
+
     // ensure date is not in the past
     if (reminderTime >= new Date()) {
       const notify = new CronJob(
