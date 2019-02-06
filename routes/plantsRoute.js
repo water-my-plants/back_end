@@ -1,5 +1,5 @@
 const express = require('express');
-const { plants } = require('../data/dbHelpers');
+const { plants, notifications } = require('../data/dbHelpers');
 const { protect } = require('../common/middleware');
 
 const router = express.Router();
@@ -86,7 +86,10 @@ router.post('/:id', protect, async (req, res) => {
     const times = [...req.body.times];
     // times.forEach(async time => await plants.addWatering(id, time));
     for (let i = 0; i < times.length; i++) {
-      const testArr = await plants.addWatering(id, times[i]);
+      const [wateringId] = await plants.addWatering(id, times[i]);
+      console.log('wateringid', wateringId);
+      const [notify] = await notifications.addNotification(wateringId);
+      console.log(notify);
     }
 
     const schedule = await plants.getWateringSchedule(id);

@@ -14,8 +14,9 @@ const moment = require('moment');
 */
 
 module.exports = {
-  // function takes in a date and schedules a new Cronjob
   notifier: date => {
+    // will also need a phone number to pass to send_sms
+    // function takes in a date and schedules a new Cronjob
     const reminderTime = new Date(date);
     // ensure date is not in the past
     if (reminderTime >= new Date()) {
