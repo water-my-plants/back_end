@@ -138,3 +138,6 @@
 
 ### DELETE /api/plants/{plantId}/schedule
 * Deletes the schedule for the selected plant
+
+### DELETE /api/plants/{plantId}/schedule/{wateringId}
+* Deletes a specific watering time from the schedule
