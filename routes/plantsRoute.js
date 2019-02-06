@@ -89,6 +89,7 @@ router.post('/:id', protect, async (req, res) => {
     for (let i = 0; i < times.length; i++) {
       const [wateringId] = await plants.addWatering(id, times[i]);
       console.log('wateringid', wateringId);
+      // if we add a notification boolean to plant, this could be an if statement
       const [notification] = await notifications.addNotification(wateringId);
       console.log('in post:', notification);
       notifier(notification);

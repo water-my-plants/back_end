@@ -1,5 +1,6 @@
 const CronJob = require('cron').CronJob;
 const moment = require('moment');
+const { sendMessage } = require('./send_sms');
 
 /* two ways to do this:
   1) when a watering schedule is created, schedule a job for each watering time
@@ -33,9 +34,7 @@ module.exports = {
     if (reminderTime >= new Date()) {
       const notify = new CronJob(
         reminderTime,
-        () => {
-          console.log('reminder sent');
-        },
+        () => sendMessage(notification),
         null,
         true,
         'America/New_York'
