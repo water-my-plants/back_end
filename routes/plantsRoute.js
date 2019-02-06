@@ -120,4 +120,16 @@ router.get('/:id/schedule', protect, async (req, res) => {
   }
 });
 
+router.delete('/:id/schedule', protect, async (req, res) => {
+  try {
+    const response = await plants.removeWateringSchedule(req.params.id);
+    console.log(response);
+    res.status(200).json({ message: 'the schedule was deleted' });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: `there was an error deleting the schedule: ${err}` });
+  }
+});
+
 module.exports = router;

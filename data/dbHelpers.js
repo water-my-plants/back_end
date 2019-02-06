@@ -39,5 +39,9 @@ exports.plants = {
   addPlant: (user_id, plant) =>
     db('plants').insert({ user_id, ...plant }, 'id'),
   addWatering: (plant_id, watering_time) =>
-    db('watering').insert({ plant_id, watering_time })
+    db('watering').insert({ plant_id, watering_time }),
+  removeWateringSchedule: plant_id =>
+    db('watering')
+      .where({ plant_id })
+      .delete()
 };
