@@ -87,12 +87,10 @@ router.post('/:id', protect, async (req, res) => {
     // times.forEach(async time => await plants.addWatering(id, time));
     for (let i = 0; i < times.length; i++) {
       const testArr = await plants.addWatering(id, times[i]);
-      console.log(testArr);
     }
 
-    let schedule = await plants.getWateringSchedule(id);
-    schedule = schedule.map(time => time.watering_time);
-    console.log(schedule);
+    const schedule = await plants.getWateringSchedule(id);
+    // schedule = schedule.map(time => time.watering_time);
     res.status(200).json(schedule);
   } catch (err) {
     res.status(500).json(err);
@@ -102,9 +100,9 @@ router.post('/:id', protect, async (req, res) => {
 // returns a plant's watering schedule
 router.get('/:id/schedule', protect, async (req, res) => {
   try {
-    let schedule = await plants.getWateringSchedule(req.params.id);
+    const schedule = await plants.getWateringSchedule(req.params.id);
     if (schedule.length) {
-      schedule = schedule.map(time => time.watering_time);
+      // schedule = schedule.map(time => time.watering_time);
       res.status(200).json(schedule);
     } else {
       res.status(400).json({
@@ -120,15 +118,32 @@ router.get('/:id/schedule', protect, async (req, res) => {
   }
 });
 
+// deletes plant's entire watering schedule
 router.delete('/:id/schedule', protect, async (req, res) => {
   try {
-    const response = await plants.removeWateringSchedule(req.params.id);
+    const response = await plants.deleteWateringSchedule(req.params.id);
     console.log(response);
     res.status(200).json({ message: 'the schedule was deleted' });
   } catch (err) {
     res
       .status(500)
       .json({ error: `there was an error deleting the schedule: ${err}` });
+  }
+});
+
+// delete a specific watering time
+// returns the modified watering schedule
+router.delete('/:plantId/schedule/:waterId', async (req, res) => {
+  try {
+    const count = await plants.deleteWateringTime(req.params.waterId);
+    if (count) {
+      const schedule = await plants.getWateringSchedule(req.params.plantId);
+      res.status(200).json(schedule);
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .json({ error: `there was an error deleting the watering time: ${err}` });
   }
 });
 
