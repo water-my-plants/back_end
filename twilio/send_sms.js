@@ -15,6 +15,7 @@ module.exports = {
         to: notification.phone
       })
       .then(message => console.log(message))
+      .catch(err => console.log('caught!', err))
       .done();
   }
 };
