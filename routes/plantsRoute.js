@@ -31,9 +31,6 @@ router.get(
     try {
       const { id } = req.params;
       const plant = await plants.getPlantById(id);
-      // if (!plant) {
-      //   res.status(400).json({ error: 'there is no plant with that id' });
-      // } else {
       res.json(plant);
       // }
     } catch (err) {

@@ -19,3 +19,6 @@ module.exports = {
       .done();
   }
 };
+
+// check notifications table every minute
+// if there is a notification that minute, send out sms and delete notification from table

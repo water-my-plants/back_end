@@ -72,13 +72,13 @@ router.get(
   checkUserAccess,
   async (req, res) => {
     try {
-      // if (`${req.decodedToken.userId}` !== req.params.id) {
-      //   res
-      //     .status(403)
-      //     .json({ error: "you are not authorized to see that user's plants" });
-      // }
       const { id } = req.params;
       const plantList = await plants.getUserPlants(id);
+      for (let i = 0; i < plantList.length; i++) {
+        plantList[i].schedule = await plants.getWateringSchedule(
+          plantList[i].id
+        );
+      }
       res.status(200).json(plantList);
     } catch (err) {
       res
