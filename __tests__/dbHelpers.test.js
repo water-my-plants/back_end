@@ -35,4 +35,13 @@ describe('Users helpers', () => {
       expect(updatedList.length).toBe(userList.length + 1);
     });
   });
+  describe('updateUser()', () => {
+    it('should update a user', async () => {
+      const changes = { username: 'j' };
+      await users.updateUser(1, changes);
+      const updatedUser = await users.getUserById(1);
+      expect(updatedUser.username).toBe('j');
+      await users.updateUser(1, { username: 'justin' });
+    });
+  });
 });
