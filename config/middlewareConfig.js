@@ -7,5 +7,5 @@ module.exports = server => {
   server.use(express.json());
   server.use(morgan('dev'));
   server.use(helmet());
-  server.use(cors({credentials: true, origin: true}));
+  server.use(cors({credentials: true, origin: 'https://water-my-plants-client.herokuapp.com/'}));
 }
