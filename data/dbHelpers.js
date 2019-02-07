@@ -39,7 +39,7 @@ exports.plants = {
   addPlant: (user_id, plant) =>
     db('plants').insert({ user_id, ...plant }, 'id'),
   addWatering: (plant_id, watering_time) =>
-    db('watering').insert({ plant_id, watering_time }),
+    db('watering').insert({ plant_id, watering_time }, 'id'),
   deleteWateringSchedule: plant_id =>
     db('watering')
       .where({ plant_id })
@@ -48,4 +48,14 @@ exports.plants = {
     db('watering')
       .where({ id })
       .delete()
+};
+
+exports.notifications = {
+  // every time we add a watering, get time, plant name, user name, user phone for notification
+  addNotification: wateringId =>
+    db('watering as w')
+      .join('plants as p', 'w.plant_id', 'p.id')
+      .join('users as u', 'p.user_id', 'u.id')
+      .where({ 'w.id': wateringId })
+      .select('u.username', 'p.name as plant', 'u.phone', 'w.watering_time')
 };
