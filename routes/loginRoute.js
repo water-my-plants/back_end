@@ -16,7 +16,6 @@ router.post('/', async (req, res) => {
       res.status(400).json({ error: 'please provide a username and password' });
     } else {
       const user = await users.getUser(username);
-      console.log(user);
       
       if (!user || !bcrypt.compareSync(password, user.password)) {
         res.status(401).json({ error: 'invalid username or password' });
