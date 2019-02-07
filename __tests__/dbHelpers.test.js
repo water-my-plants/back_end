@@ -22,4 +22,17 @@ describe('Users helpers', () => {
       expect(user).toEqual(expect.objectContaining({ username: 'justin' }));
     });
   });
+  describe('addUser', () => {
+    it('should add a user to the db', async () => {
+      const userList = await users.getUsers();
+      await users.addUser({
+        username: `faketestuser${userList.length}`,
+        password: 'faketestpw',
+        email: `faketest@email${userList.length}`,
+        phone: `098423${userList.length}`
+      });
+      const updatedList = await users.getUsers();
+      expect(updatedList.length).toBe(userList.length + 1);
+    });
+  });
 });
