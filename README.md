@@ -97,14 +97,64 @@
 ```
 
 ---
-### GET /api/users/{userId}/plants
-**JWT token required**
-* Get a list of all user's plants (json objects). Only accessible by that user.
+### GET /api/plants/{plantId}
+* Returns information on a single plant. Only accessible by plant owner.
+```
+{
+    "id": 59,
+    "user_id": 1,
+    "name": "Marigold",
+    "location": "it",
+    "description": null,
+    "last_water": null
+}
+```
 
 ---
-### GET /api/users/{userId}/plants/{plantId} [TODO or uneccesary?]
+### GET /api/users/{userId}/plants
 **JWT token required**
-* Get details on one user plant (object)
+* Returns a list of all user's plants (json objects) and scheduled watering times. Only accessible by plant owner.
+* Return example:
+```
+[
+    {
+        "id": 59,
+        "user_id": 1,
+        "name": "Marigold",
+        "location": "it",
+        "description": null,
+        "last_water": null,
+        "schedule": [
+            {
+                "id": 2036,
+                "watering_time": "2019-02-07T15:33:50.000Z"
+            },
+            {
+                "id": 2037,
+                "watering_time": "2019-02-07T16:50:50.000Z"
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "user_id": 1,
+        "name": "Thistle",
+        "location": "bedroom",
+        "description": "",
+        "last_water": null,
+        "schedule": [
+            {
+                "id": 163,
+                "watering_time": "2045-02-07T08:00:00.000Z"
+            },
+            {
+                "id": 164,
+                "watering_time": "2038-02-05T00:00:00.000Z"
+            }
+        ]
+    },
+]
+```
 
 ---
 ### PUT /api/users/{userId}
@@ -112,32 +162,81 @@
 * Update user info. Only accessible by that user.
 
 ---
-### PUT /api/users/{userId}/plants{plantId} [TODO or uneccessary?]
+### PUT /api/plants/{plantId}
 **JWT token required**
-* Update one user plant
+* Update plant. Only accessible by plant owner.
 
 ---
 ### POST /api/users/{userId}/plants
 **JWT token required**
 * Add a new plant for the user
+* POST BODY:
+```
+{
+	"name": "ficus"
+}
+```
+* Returns:
+```
+{
+    "id": 168,
+    "user_id": 1,
+    "name": "ficus",
+    "location": null,
+    "description": null,
+    "last_water": null
+}
+```
 
+---
 ### DELETE /api/plants/{plantId}
 **JWT token required**
-* Delete plant. User can only delete their own plants
+* Delete plant. Only accessible by plant owner.
 
-### POST /api/planst/{plantId}
+---
+### POST /api/plants/{plantId}
 **JWT token required**
+* Add watering times to a plant.
 * Accepts an array of times in format `YYYY-MM-DD HH:SS` and adds them to the watering schedule
 * POST body:
 ```
 	"times": ["2019-02-05 18:00", "2019-02-07 8:00"]
 ```
+* Returns the updated plant watering schedule:
+```
+[
+    {
+        "id": 2191,
+        "watering_time": "2019-02-05T18:00:00.000Z"
+    },
+    {
+        "id": 2192,
+        "watering_time": "2019-02-07T08:00:00.000Z"
+    }
+]
+```
 
+---
 ### GET /api/plants/{plantId}/schedule
 * Returns an array of scheduled watering times
+```
+[
+    {
+        "id": 2191,
+        "watering_time": "2019-02-05T18:00:00.000Z"
+    },
+    {
+        "id": 2192,
+        "watering_time": "2019-02-07T08:00:00.000Z"
+    }
+]
+```
 
+---
 ### DELETE /api/plants/{plantId}/schedule
-* Deletes the schedule for the selected plant
+* Deletes the entire schedule for the selected plant
 
+---
 ### DELETE /api/plants/{plantId}/schedule/{wateringId}
 * Deletes a specific watering time from the schedule
+* Returns the updated watering schedule
