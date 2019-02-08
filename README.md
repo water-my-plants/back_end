@@ -3,7 +3,7 @@
 ## Base URL: https://watermyplants.herokuapp.com
 
 ### Twilio Note:
-The api is set up for Twilio integration. Unfortunately, with the Twilio test account we used, you can only send SMS messages to verified numbers that you have added in your account panel. Upgrading from a test account will allow you your server to send messages to all users. 
+The api is set up for Twilio integration. Unfortunately, with the Twilio test account we used, you can only send SMS messages to verified numbers that you have added in your account panel. Upgrading from a test account will allow your server to send messages to all users. 
 
 If you would like to clone/fork the server and deploy it on Heroku, you can set it up to use Twilio by entering the following config variables in your Heroku settings:
 
