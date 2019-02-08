@@ -1,6 +1,6 @@
 const { users } = require('../data/dbHelpers.js');
 
-describe('Users helpers', () => {
+describe.skip('Users helpers', () => {
   describe('getUsers()', () => {
     it('should return an array of objects', async () => {
       // const userList = await users.getUsers();
