@@ -3,14 +3,18 @@ const { users } = require('../data/dbHelpers.js');
 describe('Users helpers', () => {
   describe('getUsers()', () => {
     it('should return an array of objects', async () => {
-      const userList = await users.getUsers();
+      // const userList = await users.getUsers();
+      const getUsersMock = jest.spyOn(users, 'getUsers');
+      const userList = getUsersMock();
       expect(userList).not.toBeNull();
       expect(userList).not.toBeUndefined();
     });
   });
   describe('getUser()', () => {
     it('should return a user from the db', async () => {
-      const user = await users.getUser('justin');
+      // const user = await users.getUser('justin');
+      const getUserMock = jest.spyOn(users, 'getUser');
+      const user = await getUserMock('justin');
       expect(user).not.toBeNull();
       expect(user).toEqual(expect.objectContaining({ username: 'justin' }));
     });
@@ -38,10 +42,15 @@ describe('Users helpers', () => {
   describe('updateUser()', () => {
     it('should update a user', async () => {
       const changes = { username: 'j' };
-      await users.updateUser(1, changes);
-      const updatedUser = await users.getUserById(1);
-      expect(updatedUser.username).toBe('j');
-      await users.updateUser(1, { username: 'justin' });
+      const updateUserMock = jest.spyOn(users, 'updateUser');
+      // await users.updateUser(1, changes);
+      // const updatedUser = await updateUserMock(1, changes);
+      expect(await updateUserMock(1, changes)).toBe(1);
+      // const updatedUser = await users.getUserById(1);
+      // expect(updatedUser.username).toBe('j');
+      // console.log(updatedUser);
+
+      // await users.updateUser(1, { username: 'justin' });
     });
   });
 });
