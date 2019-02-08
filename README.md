@@ -1,7 +1,17 @@
 # API for Water My Plants project
 
 ## Base URL: https://watermyplants.herokuapp.com
-## endpoints
+
+### Twilio Note:
+The api is set up for Twilio integration. Unfortunately, with the Twilio test acouunt we used, you can only send SMS messages to verified numbers that you have added in your account panel. Upgrading from a test account will allow you your server to send messages to all users. 
+
+If you would like to clone/fork the server and deploy it on Heroku, you can set it up to use Twilio by entering the following config variables in your Heroku settings:
+
+* `ACCOUNT_SID:` ACCOUNT SID # found in your Twilio dashboard
+* `AUTH_TOKEN:` Found in your Twilio dashboard 
+* `TW_PHONE:` Found in your Twilio dashboard
+
+## Endpoints
 
 ### POST /api/register
 * registers a user. must have username, password, email, and phone number. image url optional.
