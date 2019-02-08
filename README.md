@@ -228,6 +228,7 @@ If you would like to clone/fork the server and deploy it on Heroku, you can set 
 
 ---
 ### GET /api/plants/{plantId}/schedule
+**JWT token required**
 * Returns an array of scheduled watering times
 ```
 [
@@ -244,9 +245,11 @@ If you would like to clone/fork the server and deploy it on Heroku, you can set 
 
 ---
 ### DELETE /api/plants/{plantId}/schedule
+**JWT token required**
 * Deletes the entire schedule for the selected plant
 
 ---
 ### DELETE /api/plants/{plantId}/schedule/{wateringId}
+**JWT token required**
 * Deletes a specific watering time from the schedule
 * Returns the updated watering schedule
